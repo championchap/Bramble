@@ -137,20 +137,20 @@ function update() {
   prevMouse.x = cloneOfMouse.x
   prevMouse.y = cloneOfMouse.y
 
-  prevMouse.left.pressed = mouse.left.pressed
-  prevMouse.left.justPressed = mouse.left.justPressed
-  prevMouse.left.released = mouse.left.released
-  prevMouse.left.justReleased = mouse.left.justReleased
+  prevMouse.left.pressed = cloneOfMouse.left.pressed
+  prevMouse.left.justPressed = cloneOfMouse.left.justPressed
+  prevMouse.left.released = cloneOfMouse.left.released
+  prevMouse.left.justReleased = cloneOfMouse.left.justReleased
 
-  prevMouse.wheel.pressed = mouse.wheel.pressed
-  prevMouse.wheel.justPressed = mouse.wheel.justPressed
-  prevMouse.wheel.released = mouse.wheel.released
-  prevMouse.wheel.justReleased = mouse.wheel.justReleased
+  prevMouse.wheel.pressed = cloneOfMouse.wheel.pressed
+  prevMouse.wheel.justPressed = cloneOfMouse.wheel.justPressed
+  prevMouse.wheel.released = cloneOfMouse.wheel.released
+  prevMouse.wheel.justReleased = cloneOfMouse.wheel.justReleased
 
-  prevMouse.right.pressed = mouse.right.pressed
-  prevMouse.right.justPressed = mouse.right.justPressed
-  prevMouse.right.released = mouse.right.released
-  prevMouse.right.justReleased = mouse.right.justReleased
+  prevMouse.right.pressed = cloneOfMouse.right.pressed
+  prevMouse.right.justPressed = cloneOfMouse.right.justPressed
+  prevMouse.right.released = cloneOfMouse.right.released
+  prevMouse.right.justReleased = cloneOfMouse.right.justReleased
 }
 
 function start() {
