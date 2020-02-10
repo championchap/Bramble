@@ -1,4 +1,5 @@
 import { canvas } from '../canvas'
+import vec2 from '../vec2'
 
 let prevMouse = defaultState()
 let mouse = defaultState()
@@ -52,8 +53,10 @@ function defaultWheelState() {
 
 function defaultState() {
   return {
-    x: 0,
-    y: 0,
+    x: vec2.create(),
+    y: vec2.create(),
+
+    moved: false,
 
     left: defaultButtonState(),
     wheel: defaultWheelState(),
