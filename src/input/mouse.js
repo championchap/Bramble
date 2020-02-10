@@ -53,10 +53,8 @@ function defaultWheelState() {
 
 function defaultState() {
   return {
-    x: vec2.create(),
-    y: vec2.create(),
-
-    moved: false,
+    x: 0,
+    y: 0,
 
     left: defaultButtonState(),
     wheel: defaultWheelState(),
@@ -82,6 +80,8 @@ function move(event) {
 
   mouse.x = newPos.x
   mouse.y = newPos.y
+
+  moved = true
 }
 
 function down(event) {
@@ -126,6 +126,11 @@ function wheel(event) {
 
 function update() {
   mouse.wheel.moved = false
+
+  if (mouse.x === prevMouse.x && mouse.y === prevMouse.y) {
+    mouse.moved = false
+  }
+
   prevMouse = clone(mouse)
 }
 
@@ -144,5 +149,6 @@ function start() {
 export default {
   start,
   update,
+  prevState: prevMouse,
   state: mouse
 }

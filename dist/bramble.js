@@ -250,7 +250,7 @@ function loadAllTerrain() {
 /*!************************!*\
   !*** ./src/bramble.js ***!
   \************************/
-/*! exports provided: assets, game, grid, graphics, keyboard, mouse, music, sfx, sprite, textbox */
+/*! exports provided: assets, game, grid, graphics, keyboard, mouse, prevMouse, music, sfx, sprite, textbox */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -271,6 +271,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "keyboard", function() { return _input__WEBPACK_IMPORTED_MODULE_4__["keyboard"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "mouse", function() { return _input__WEBPACK_IMPORTED_MODULE_4__["mouse"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "prevMouse", function() { return _input__WEBPACK_IMPORTED_MODULE_4__["prevMouse"]; });
 
 /* harmony import */ var _music__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./music */ "./src/music.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "music", function() { return _music__WEBPACK_IMPORTED_MODULE_5__["default"]; });
@@ -794,13 +796,14 @@ module.exports = {
 /*!**********************!*\
   !*** ./src/input.js ***!
   \**********************/
-/*! exports provided: keyboard, mouse, default */
+/*! exports provided: keyboard, mouse, prevMouse, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "keyboard", function() { return keyboard; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mouse", function() { return mouse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prevMouse", function() { return prevMouse; });
 /* harmony import */ var _input_keyboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./input/keyboard */ "./src/input/keyboard.js");
 /* harmony import */ var _input_mouse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./input/mouse */ "./src/input/mouse.js");
 
@@ -816,8 +819,10 @@ function update() {
   _input_mouse__WEBPACK_IMPORTED_MODULE_1__["default"].update();
 }
 
-var keyboard = _input_keyboard__WEBPACK_IMPORTED_MODULE_0__["default"].state;
+var keyboard = _input_keyboard__WEBPACK_IMPORTED_MODULE_0__["default"].state; // TODO: export prevKeyboard state 
+
 var mouse = _input_mouse__WEBPACK_IMPORTED_MODULE_1__["default"].state;
+var prevMouse = _input_mouse__WEBPACK_IMPORTED_MODULE_1__["default"].prevState;
 /* harmony default export */ __webpack_exports__["default"] = ({
   start: start,
   update: update
@@ -1287,9 +1292,8 @@ function defaultWheelState() {
 
 function defaultState() {
   return {
-    x: _vec2__WEBPACK_IMPORTED_MODULE_1___default.a.create(),
-    y: _vec2__WEBPACK_IMPORTED_MODULE_1___default.a.create(),
-    moved: false,
+    x: 0,
+    y: 0,
     left: defaultButtonState(),
     wheel: defaultWheelState(),
     right: defaultButtonState()
@@ -1312,6 +1316,7 @@ function move(event) {
   var newPos = relative(event, _canvas__WEBPACK_IMPORTED_MODULE_0__["canvas"]);
   mouse.x = newPos.x;
   mouse.y = newPos.y;
+  moved = true;
 }
 
 function down(event) {
@@ -1356,6 +1361,11 @@ function wheel(event) {
 
 function update() {
   mouse.wheel.moved = false;
+
+  if (mouse.x === prevMouse.x && mouse.y === prevMouse.y) {
+    mouse.moved = false;
+  }
+
   prevMouse = clone(mouse);
 }
 
@@ -1373,6 +1383,7 @@ function start() {
 /* harmony default export */ __webpack_exports__["default"] = ({
   start: start,
   update: update,
+  prevState: prevMouse,
   state: mouse
 });
 
