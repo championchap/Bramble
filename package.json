@@ -1,6 +1,6 @@
 {
   "name": "@erikwatson/bramble",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A game engine built in JavaScript",
   "main": "dist/bramble.js",
   "author": "Erik Watson",
