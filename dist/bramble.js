@@ -819,7 +819,7 @@ function update() {
   _input_mouse__WEBPACK_IMPORTED_MODULE_1__["default"].update();
 }
 
-var keyboard = _input_keyboard__WEBPACK_IMPORTED_MODULE_0__["default"].state; // TODO: export prevKeyboard state 
+var keyboard = _input_keyboard__WEBPACK_IMPORTED_MODULE_0__["default"].state; // TODO: export prevKeyboard state
 
 var mouse = _input_mouse__WEBPACK_IMPORTED_MODULE_1__["default"].state;
 var prevMouse = _input_mouse__WEBPACK_IMPORTED_MODULE_1__["default"].prevState;
@@ -1366,7 +1366,22 @@ function update() {
     mouse.moved = false;
   }
 
-  prevMouse = clone(mouse);
+  var cloneOfMouse = clone(mouse); // update the previous mouse state in place
+
+  prevMouse.x = cloneOfMouse.x;
+  prevMouse.y = cloneOfMouse.y;
+  prevMouse.left.pressed = mouse.left.pressed;
+  prevMouse.left.justPressed = mouse.left.justPressed;
+  prevMouse.left.released = mouse.left.released;
+  prevMouse.left.justReleased = mouse.left.justReleased;
+  prevMouse.wheel.pressed = mouse.wheel.pressed;
+  prevMouse.wheel.justPressed = mouse.wheel.justPressed;
+  prevMouse.wheel.released = mouse.wheel.released;
+  prevMouse.wheel.justReleased = mouse.wheel.justReleased;
+  prevMouse.right.pressed = mouse.right.pressed;
+  prevMouse.right.justPressed = mouse.right.justPressed;
+  prevMouse.right.released = mouse.right.released;
+  prevMouse.right.justReleased = mouse.right.justReleased;
 }
 
 function start() {

@@ -131,7 +131,26 @@ function update() {
     mouse.moved = false
   }
 
-  prevMouse = clone(mouse)
+  const cloneOfMouse = clone(mouse)
+
+  // update the previous mouse state in place
+  prevMouse.x = cloneOfMouse.x
+  prevMouse.y = cloneOfMouse.y
+
+  prevMouse.left.pressed = mouse.left.pressed
+  prevMouse.left.justPressed = mouse.left.justPressed
+  prevMouse.left.released = mouse.left.released
+  prevMouse.left.justReleased = mouse.left.justReleased
+
+  prevMouse.wheel.pressed = mouse.wheel.pressed
+  prevMouse.wheel.justPressed = mouse.wheel.justPressed
+  prevMouse.wheel.released = mouse.wheel.released
+  prevMouse.wheel.justReleased = mouse.wheel.justReleased
+
+  prevMouse.right.pressed = mouse.right.pressed
+  prevMouse.right.justPressed = mouse.right.justPressed
+  prevMouse.right.released = mouse.right.released
+  prevMouse.right.justReleased = mouse.right.justReleased
 }
 
 function start() {
