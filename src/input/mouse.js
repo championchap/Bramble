@@ -165,9 +165,17 @@ function start() {
   mouse.y = canvas.height / 2
 }
 
+const appContainer = document.getElementById('app-container')
+
 export default {
   start,
   update,
   prevState: prevMouse,
-  state: mouse
+  state: mouse,
+  get cursor() {
+    return appContainer.style.cursor
+  },
+  set cursor(type = 'auto') {
+    appContainer.style.cursor = type
+  }
 }
