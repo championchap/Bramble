@@ -81,7 +81,7 @@ function move(event) {
   mouse.x = newPos.x
   mouse.y = newPos.y
 
-  moved = true
+  mouse.moved = true
 }
 
 function down(event) {
