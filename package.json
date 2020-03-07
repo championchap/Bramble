@@ -1,6 +1,6 @@
 {
   "name": "@erikwatson/bramble",
-  "version": "0.1.2",
+  "version": "0.1.5",
   "description": "A game engine built in JavaScript",
   "main": "dist/bramble.js",
   "author": "Erik Watson",
@@ -30,7 +30,7 @@
     "build": "yarn run build:prod && yarn run build:dev",
     "build:prod": "yarn run webpack-cli --config webpack.prod.js",
     "build:dev": "yarn run webpack-cli --config webpack.dev.js",
-    "watch": ""
+    "watch": "yarn build --watch"
   },
   "dependencies": {
     "node-fetch": "^2.0.0"

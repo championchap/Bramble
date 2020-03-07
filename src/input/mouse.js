@@ -52,13 +52,23 @@ function defaultWheelState() {
 }
 
 function defaultState() {
+  const appContainer = document.getElementById('app-container')
+
   return {
     x: 0,
     y: 0,
 
     left: defaultButtonState(),
     wheel: defaultWheelState(),
-    right: defaultButtonState()
+    right: defaultButtonState(),
+
+    get cursor() {
+      return appContainer.style.cursor
+    },
+
+    set cursor(type = 'auto') {
+      appContainer.style.cursor = type
+    }
   }
 }
 
@@ -154,7 +164,7 @@ function update() {
 }
 
 function start() {
-  // mouse events
+  // setup the mouse events
   canvas.addEventListener('mousemove', move)
   canvas.addEventListener('mousedown', down)
   canvas.addEventListener('mouseup', up)
@@ -165,17 +175,9 @@ function start() {
   mouse.y = canvas.height / 2
 }
 
-const appContainer = document.getElementById('app-container')
-
 export default {
   start,
   update,
   prevState: prevMouse,
-  state: mouse,
-  get cursor() {
-    return appContainer.style.cursor
-  },
-  set cursor(type = 'auto') {
-    appContainer.style.cursor = type
-  }
+  state: mouse
 }

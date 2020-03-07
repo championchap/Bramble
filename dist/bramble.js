@@ -250,7 +250,7 @@ function loadAllTerrain() {
 /*!************************!*\
   !*** ./src/bramble.js ***!
   \************************/
-/*! exports provided: assets, game, grid, graphics, keyboard, mouse, prevMouse, music, sfx, sprite, textbox */
+/*! exports provided: assets, game, grid, graphics, keyboard, mouse, prevMouse, music, sfx, sprite, textbox, vec2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -285,6 +285,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _textbox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./textbox */ "./src/textbox.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "textbox", function() { return _textbox__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
+/* harmony import */ var _vec2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./vec2 */ "./src/vec2.js");
+/* harmony import */ var _vec2__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_vec2__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "vec2", function() { return _vec2__WEBPACK_IMPORTED_MODULE_9___default.a; });
 
 
 
@@ -1291,12 +1295,26 @@ function defaultWheelState() {
 }
 
 function defaultState() {
+  var appContainer = document.getElementById('app-container');
   return {
     x: 0,
     y: 0,
     left: defaultButtonState(),
     wheel: defaultWheelState(),
-    right: defaultButtonState()
+    right: defaultButtonState(),
+
+    get cursor() {
+      return appContainer.style.cursor;
+    },
+
+    set cursor(type) {
+      if (type === void 0) {
+        type = 'auto';
+      }
+
+      appContainer.style.cursor = type;
+    }
+
   };
 }
 
@@ -1316,7 +1334,7 @@ function move(event) {
   var newPos = relative(event, _canvas__WEBPACK_IMPORTED_MODULE_0__["canvas"]);
   mouse.x = newPos.x;
   mouse.y = newPos.y;
-  moved = true;
+  mouse.moved = true;
 }
 
 function down(event) {
@@ -1385,7 +1403,7 @@ function update() {
 }
 
 function start() {
-  // mouse events
+  // setup the mouse events
   _canvas__WEBPACK_IMPORTED_MODULE_0__["canvas"].addEventListener('mousemove', move);
   _canvas__WEBPACK_IMPORTED_MODULE_0__["canvas"].addEventListener('mousedown', down);
   _canvas__WEBPACK_IMPORTED_MODULE_0__["canvas"].addEventListener('mouseup', up);
