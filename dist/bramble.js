@@ -437,7 +437,8 @@ function getContext() {
   return ctx;
 }
 
-function clear(color) {
+function clear() {
+  var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#000000';
   rect(0, 0, ctx.canvas.width, ctx.canvas.height, {
     fill: {
       color: color
@@ -447,12 +448,12 @@ function clear(color) {
 
 var defaultRect = {
   fill: {
-    color: '#ffffff',
+    color: '#000000',
     opacity: 1
   },
   line: {
     width: 2,
-    color: '#000000',
+    color: '#ffffff',
     opacity: 1
   }
 };

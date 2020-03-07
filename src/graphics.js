@@ -10,7 +10,7 @@ function getContext() {
   return ctx
 }
 
-function clear(color) {
+function clear(color = '#000000') {
   rect(0, 0, ctx.canvas.width, ctx.canvas.height, {
     fill: {
       color
@@ -20,12 +20,12 @@ function clear(color) {
 
 const defaultRect = {
   fill: {
-    color: '#ffffff',
+    color: '#000000',
     opacity: 1
   },
   line: {
     width: 2,
-    color: '#000000',
+    color: '#ffffff',
     opacity: 1
   }
 }
