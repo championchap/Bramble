@@ -74,10 +74,26 @@ function create(_x, _y) {
     y -= s
   }
 
+  const lerp = (v, t) => {
+    x = x + (v.x - x) * t
+    y = y + (v.y - y) * t
+  }
+
+  const clamp = (min = 0, max = 1) => {
+    const length = getLength()
+
+    if (length > max) {
+      setLength(max)
+    }
+
+    if (length < min) {
+      setLength(min)
+    }
+  }
+
   return {
     add,
     addScalar,
-    clone,
     divide,
     divideScalar,
     dot,
@@ -91,6 +107,8 @@ function create(_x, _y) {
     setLength,
     subtract,
     subtractScalar,
+    lerp,
+    clamp,
     set x(_x) {
       x = _x
     },

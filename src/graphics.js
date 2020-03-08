@@ -49,7 +49,7 @@ function rect(x, y, w, h, options = defaultRect) {
 
 const defaultLine = {
   width: 2,
-  color: '#000000'
+  color: '#ffffff'
 }
 
 function line(from, to, options = defaultLine) {

@@ -480,7 +480,7 @@ function rect(x, y, w, h) {
 
 var defaultLine = {
   width: 2,
-  color: '#000000'
+  color: '#ffffff'
 };
 
 function line(from, to) {
@@ -811,17 +811,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "prevMouse", function() { return prevMouse; });
 /* harmony import */ var _input_keyboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./input/keyboard */ "./src/input/keyboard.js");
 /* harmony import */ var _input_mouse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./input/mouse */ "./src/input/mouse.js");
+/* harmony import */ var _input_pad__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./input/pad */ "./src/input/pad.js");
+
 
 
 
 function start() {
   _input_keyboard__WEBPACK_IMPORTED_MODULE_0__["default"].start();
   _input_mouse__WEBPACK_IMPORTED_MODULE_1__["default"].start();
+  _input_pad__WEBPACK_IMPORTED_MODULE_2__["default"].start();
 }
 
 function update() {
   _input_keyboard__WEBPACK_IMPORTED_MODULE_0__["default"].update();
   _input_mouse__WEBPACK_IMPORTED_MODULE_1__["default"].update();
+  _input_pad__WEBPACK_IMPORTED_MODULE_2__["default"].update();
 }
 
 var keyboard = _input_keyboard__WEBPACK_IMPORTED_MODULE_0__["default"].state; // TODO: export prevKeyboard state
@@ -1435,6 +1439,33 @@ function start() {
 
 /***/ }),
 
+/***/ "./src/input/pad.js":
+/*!**************************!*\
+  !*** ./src/input/pad.js ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function start() {
+  window.addEventListener('gamepadconnected', function (e) {
+    console.log('connect');
+  });
+  window.addEventListener('gamepaddisconnected', function (e) {
+    console.log('disconnect');
+  });
+}
+
+function update() {}
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  start: start,
+  update: update
+});
+
+/***/ }),
+
 /***/ "./src/music.js":
 /*!**********************!*\
   !*** ./src/music.js ***!
@@ -1715,10 +1746,28 @@ function create(_x, _y) {
     y -= s;
   };
 
+  var lerp = function lerp(v, t) {
+    x = x + (v.x - x) * t;
+    y = y + (v.y - y) * t;
+  };
+
+  var clamp = function clamp() {
+    var min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+    var length = getLength();
+
+    if (length > max) {
+      setLength(max);
+    }
+
+    if (length < min) {
+      setLength(min);
+    }
+  };
+
   return {
     add: add,
     addScalar: addScalar,
-    clone: clone,
     divide: divide,
     divideScalar: divideScalar,
     dot: dot,
@@ -1732,6 +1781,8 @@ function create(_x, _y) {
     setLength: setLength,
     subtract: subtract,
     subtractScalar: subtractScalar,
+    lerp: lerp,
+    clamp: clamp,
 
     set x(_x) {
       x = _x;
